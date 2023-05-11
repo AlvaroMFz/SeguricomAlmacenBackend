@@ -1,5 +1,6 @@
 var Producto = require('../models/producto');
 var fs = require('fs');
+var path = require('path');
 
 function registrar(req, res) {
     var data = req.body;
@@ -177,11 +178,25 @@ function update_stock(req, res) {
         }
     });
 }
+
+function get_img(req,res) {  
+    var img = req.params['img'];
+
+    if(img != "null"){
+        let path_img = './uploads/productos/'+ img;
+        res.status(200).sendFile(path.resolve(path_img));
+    }else{
+        let path_img = './uploads/productos/default.jpg';
+        res.status(200).sendFile(path.resolve(path_img));
+    }
+}
+
 module.exports = {
     registrar,
     listar,
     editar,
     obtener_producto,
     eliminar,
-    update_stock
+    update_stock,
+    get_img
 }
