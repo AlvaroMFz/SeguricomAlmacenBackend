@@ -1,4 +1,5 @@
 var Producto = require('../models/producto');
+var fs = require('fs');
 
 function registrar(req, res) {
     var data = req.body;
@@ -75,8 +76,14 @@ function listar(req, res) {
 function editar(req, res) {
     var data = req.body;
     var id = req.params['id'];
+    var img = req.params['img'];
 
     if (req.files) {
+
+        fs.unlink('./uploads/productos/'+img, (err)=>{
+            if(err) throw err;
+        });
+
         var imagen_path = req.files.imagen.path;
         var name = imagen_path.split('\\');
         var imagen_name = name[2];
@@ -118,8 +125,63 @@ function editar(req, res) {
 
 }
 
+function obtener_producto(req,res) {
+    var id = req.params['id'];
+
+    Producto.findOne({_id: id}, (err, producto_data)=>{
+        if(err){
+            res.status(500).send({ message: 'Error en el servidor' });
+        }else{
+            if(producto_data){
+                res.status(200).send({ producto: producto_data });
+            }else{
+                res.status(403).send({ message: 'No existe el registro' });
+            }
+        }
+    });
+}
+
+function eliminar(req,res) {
+    var id = req.params['id'];
+
+    Producto.findByIdAndRemove({_id:id}, (err, producto_delete)=>{
+        if(err){
+            res.status(500).send({ message: 'Error en el servidor' });
+        }else{
+            if(producto_delete){
+                fs.unlink('./uploads/productos/'+producto_delete.imagen, (err)=>{
+                    if(err) throw err;
+                });
+                res.status(200).send({ producto: producto_delete });
+            }else{
+                res.status(403).send({ message: 'No se elimino ningun registro' });
+            }
+        }
+    });
+
+}
+
+function update_stock(req, res) {
+    var id = req.params['id'];
+    var data = req.body;
+    
+    Producto.findById(id, (err, producto_data)=> {
+        if(producto_data){
+            Producto.findByIdAndUpdate(id, {stock: parseInt(producto_data.stock) + parseInt(data.stock)}, (err, producto_edit)=>{
+                if(producto_edit){
+                    res.status(200).send({producto: producto_edit});
+                }
+            });
+        }else{
+            res.status(500).send(err);
+        }
+    });
+}
 module.exports = {
     registrar,
     listar,
-    editar
+    editar,
+    obtener_producto,
+    eliminar,
+    update_stock
 }
