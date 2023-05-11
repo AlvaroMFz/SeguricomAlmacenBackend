@@ -1,9 +1,9 @@
 var Producto = require('../models/producto');
 
-function registrar(req, res){
+function registrar(req, res) {
     var data = req.body;
-    
-    if(req.files){
+
+    if (req.files) {
         var imagen_path = req.files.imagen.path;
         var name = imagen_path.split('\\');
         var imagen_name = name[2];
@@ -18,20 +18,20 @@ function registrar(req, res){
         producto.idcategoria = data.idcategoria;
         producto.puntos = data.puntos;
 
-        producto.save((err, producto_save)=>{
-            if(err){
-                res.status(500).send({message: 'Error en el servidor'});
-            }else{
-                if(producto_save){
-                    res.status(200).send({producto: producto_save});
-                }else{
-                    res.status(403).send({message: 'No se registro el producto'});
+        producto.save((err, producto_save) => {
+            if (err) {
+                res.status(500).send({ message: 'Error en el servidor' });
+            } else {
+                if (producto_save) {
+                    res.status(200).send({ producto: producto_save });
+                } else {
+                    res.status(403).send({ message: 'No se registro el producto' });
                 }
             }
         });
 
 
-    }else{
+    } else {
         var producto = new Producto();
         producto.titulo = data.titulo;
         producto.descripcion = data.descripcion;
@@ -42,37 +42,84 @@ function registrar(req, res){
         producto.idcategoria = data.idcategoria;
         producto.puntos = data.puntos;
 
-        producto.save((err, producto_save)=>{
-            if(err){
-                res.status(500).send({message: 'Error en el servidor'});
-            }else{
-                if(producto_save){
-                    res.status(200).send({producto: producto_save});
-                }else{
-                    res.status(403).send({message: 'No se registro el producto'});
+        producto.save((err, producto_save) => {
+            if (err) {
+                res.status(500).send({ message: 'Error en el servidor' });
+            } else {
+                if (producto_save) {
+                    res.status(200).send({ producto: producto_save });
+                } else {
+                    res.status(403).send({ message: 'No se registro el producto' });
                 }
             }
         });
     }
 }
 
-function listar(req, res){
+function listar(req, res) {
     var titulo = req.params['titulo'];
 
-    Producto.find({titulo: new RegExp(titulo, 'i')}, (err,productos_listado)=>{
-        if(err){
-            res.status(500).send({message: 'Error en el servidor'});
-        }else{
-            if(productos_listado){
-                res.status(200).send({productos: productos_listado});
-            }else{
-                res.status(403).send({message: 'No hay ningún registro con ese titulo'});
+    Producto.find({ titulo: new RegExp(titulo, 'i') }, (err, productos_listado) => {
+        if (err) {
+            res.status(500).send({ message: 'Error en el servidor' });
+        } else {
+            if (productos_listado) {
+                res.status(200).send({ productos: productos_listado });
+            } else {
+                res.status(403).send({ message: 'No hay ningún registro con ese titulo' });
             }
         }
     });
 }
 
+function editar(req, res) {
+    var data = req.body;
+    var id = req.params['id'];
+
+    if (req.files) {
+        var imagen_path = req.files.imagen.path;
+        var name = imagen_path.split('\\');
+        var imagen_name = name[2];
+
+
+        Producto.findByIdAndUpdate({ _id: id }, {
+            titulo: data.titulo, descripcion: data.descripcion, imagen: imagen_name,
+            precio_compra: data.precio_compra, precio_venta: data.precio_venta, stock: data.stock, idcategoria: data.idcategoria,
+            puntos: data.puntos
+        }, (err, producto_edit) => {
+            if (err) {
+                res.status(500).send({ message: 'Error en el servidor' });
+            } else {
+                if (producto_edit) {
+                    res.status(200).send({ producto: producto_edit });
+                } else {
+                    res.status(403).send({ message: 'No se editó el producto' });
+                }
+            }
+        });
+    } else {
+        Producto.findByIdAndUpdate({ _id: id }, {
+            titulo: data.titulo, descripcion: data.descripcion,
+            precio_compra: data.precio_compra, precio_venta: data.precio_venta, stock: data.stock, idcategoria: data.idcategoria,
+            puntos: data.puntos
+        }, (err, producto_edit) => {
+            if (err) {
+                res.status(500).send({ message: 'Error en el servidor' });
+            } else {
+                if (producto_edit) {
+                    res.status(200).send({ producto: producto_edit });
+                } else {
+                    res.status(403).send({ message: 'No se editó el producto' });
+                }
+            }
+        });
+    }
+
+
+}
+
 module.exports = {
     registrar,
-    listar
+    listar,
+    editar
 }
