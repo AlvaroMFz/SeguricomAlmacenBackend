@@ -7,6 +7,4 @@ var VentaSchema = Schema({
     fecha: {type: Date, default: Date.now},
 });
 
-//TERMINE MAS APIS
-//12345
 module.exports = mongoose.model('venta', VentaSchema);

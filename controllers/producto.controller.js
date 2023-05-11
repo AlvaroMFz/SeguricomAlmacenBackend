@@ -56,6 +56,23 @@ function registrar(req, res){
     }
 }
 
+function listar(req, res){
+    var titulo = req.params['titulo'];
+
+    Producto.find({titulo: new RegExp(titulo, 'i')}, (err,productos_listado)=>{
+        if(err){
+            res.status(500).send({message: 'Error en el servidor'});
+        }else{
+            if(productos_listado){
+                res.status(200).send({productos: productos_listado});
+            }else{
+                res.status(403).send({message: 'No hay ningún registro con ese titulo'});
+            }
+        }
+    });
+}
+
 module.exports = {
-    registrar
+    registrar,
+    listar
 }
