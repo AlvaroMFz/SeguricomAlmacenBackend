@@ -1,10 +1,12 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+
 //ROUTES
 const user_routes = require('./routes/user.routes');
 const categoria_routes = require('./routes/categoria.routes');
 const producto_routes = require('./routes/producto.routes');
+const cliente_routes = require('./routes/cliente.routes');
 
 require('./db');
 
@@ -27,5 +29,6 @@ app.use((req,res ,next) => {
 app.use('/api', user_routes);
 app.use('/api', categoria_routes);
 app.use('/api', producto_routes);
+app.use('/api', cliente_routes);
 
 module.exports = app;
