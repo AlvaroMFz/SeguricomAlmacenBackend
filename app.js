@@ -30,5 +30,6 @@ app.use('/api', user_routes);
 app.use('/api', categoria_routes);
 app.use('/api', producto_routes);
 app.use('/api', cliente_routes);
+//app.use('/api', venta_routes);
 
 module.exports = app;
