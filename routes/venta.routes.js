@@ -3,8 +3,9 @@ var ventaController =  require('../controllers/venta.controller');
 
 var api = express.Router();
 
-api.post('/venta"/registrar',ventaController.registrar);
-api.get('/venta/datos/:id',ventaController.datos_id);
-
+api.post('/venta/registrar',ventaController.registrar);
+api.get('/venta/:id',ventaController.datos_venta);
+api.get('/ventas',ventaController.listado_venta);
+api.get('/venta/data/:id',ventaController.detalles_venta);
 
 module.exports = api;

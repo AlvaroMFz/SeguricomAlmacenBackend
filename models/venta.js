@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var VentaSchema = Schema({
     idcliente: {type: Schema.ObjectId, ref: 'cliente'},
-    iduser: {type: Schema.ObjectId, ref: 'user'},
+    iduser: {type: Schema.ObjectId, ref: 'users'},
     fecha: {type: Date, default: Date.now},
 });
 

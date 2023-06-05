@@ -7,6 +7,7 @@ const user_routes = require('./routes/user.routes');
 const categoria_routes = require('./routes/categoria.routes');
 const producto_routes = require('./routes/producto.routes');
 const cliente_routes = require('./routes/cliente.routes');
+const venta_routes = require('./routes/venta.routes');
 
 require('./db');
 
@@ -30,6 +31,6 @@ app.use('/api', user_routes);
 app.use('/api', categoria_routes);
 app.use('/api', producto_routes);
 app.use('/api', cliente_routes);
-//app.use('/api', venta_routes);
+app.use('/api', venta_routes);
 
 module.exports = app;
