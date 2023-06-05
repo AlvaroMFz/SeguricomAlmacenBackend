@@ -1,7 +1,5 @@
 
 
-
-
 function datos_venta(req,res){
     var id = req.params['id'];
 
