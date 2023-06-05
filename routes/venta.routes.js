@@ -6,4 +6,5 @@ const api = express.Router();
 api.post('/venta/registrar', ventaController.registrar)
 
 
+
 module.exports = api;
