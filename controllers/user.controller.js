@@ -57,11 +57,11 @@ function login(req, res){
                             });
                         }
                     }else{
-                        res.status(403).send({message: 'El correo o contraseña no coinciden'});
+                        res.status(403).send({message: 'La contraseña no coincide'});
                     }
                 });
             }else{
-                res.status(403).send({message: 'El correo no existe'});
+                res.status(403).send({message: 'El correo no coincide'});
             }
         }
     });
