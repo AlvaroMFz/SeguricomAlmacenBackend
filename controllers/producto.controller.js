@@ -91,7 +91,7 @@ function editar(req,res){
         var name = imagen_path.split('\\');
         var imagen_name = name[2];
 
-        Producto.findByIdAndUpdate({_id:id},{titulo: data.titulo, descripcion: data.descripcion, imagen:imagen_name, precio_compra: data.precio_compra, precio_venta: data.precio_venta, stock: data.stock,idcategoria: data.idcategoria, puntos: data.puntos}, (err, producto_edit) =>{
+        Producto.findByIdAndUpdate({_id:id},{titulo: data.titulo, descripcion: data.descripcion, imagen:imagen_name, precio_compra: data.precio_compra, precio_venta: data.precio_venta, idcategoria: data.idcategoria, puntos: data.puntos}, (err, producto_edit) =>{
             if(err){
                 res.status(500).send({message: 'Error en el servidor'});
             }else{
@@ -103,7 +103,7 @@ function editar(req,res){
             }
         });
     }else{
-        Producto.findByIdAndUpdate({_id:id},{titulo: data.titulo, descripcion: data.descripcion, precio_compra: data.precio_compra, precio_venta: data.precio_venta, stock: data.stock,idcategoria: data.idcategoria, puntos: data.puntos}, (err, producto_edit) =>{
+        Producto.findByIdAndUpdate({_id:id},{titulo: data.titulo, descripcion: data.descripcion, precio_compra: data.precio_compra, precio_venta: data.precio_venta, idcategoria: data.idcategoria, puntos: data.puntos}, (err, producto_edit) =>{
             if(err){
                 res.status(500).send({message: 'Error en el servidor'});
             }else{
