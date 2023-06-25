@@ -118,10 +118,24 @@ function get_user(req, res){
     });
 }
 
+function eliminar(req, res) {
+    var id = req.params['id'];
+
+    User.findByIdAndRemove(id, (err, user_delete) => {
+        if(user_delete){
+            res.status(200).send({ser: user_delete});
+        }else{
+            res.status(500).send(err);
+        }
+    });
+}
+
+
 module.exports= { 
     registrar,
     login,
     listar,
     editar,
     get_user,
+    eliminar
 }
