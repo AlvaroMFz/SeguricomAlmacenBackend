@@ -34,36 +34,6 @@ function ObtenerEspecialista(req, res) {
       }
    
 }
-function ObtenerGerente(req, res) {  
-    try {
-        Cliente.find({rol:2})
-          .then(function(clientes) {
-            const clientesJSON = JSON.parse(JSON.stringify(clientes));
-            res.status(200).json({ clientes: clientesJSON });
-          })
-          .catch(function(error) {
-            throw error;
-          });
-      } catch (error) {
-        res.status(500).json({ msg: error.message });
-      }
-   
-}
-function ObtenerAdministrador(req, res) {  
-    try {
-        Cliente.find({rol:1})
-          .then(function(clientes) {
-            const clientesJSON = JSON.parse(JSON.stringify(clientes));
-            res.status(200).json({ clientes: clientesJSON });
-          })
-          .catch(function(error) {
-            throw error;
-          });
-      } catch (error) {
-        res.status(500).json({ msg: error.message });
-      }
-   
-}
 
 
 function registrar(req, res) {
@@ -148,7 +118,5 @@ module.exports = {
     autenticar,
     ObtenerClientes,
     ObtenerEspecialista,
-    ObtenerGerente,
-    ObtenerAdministrador,
     solicitarCita
 }
