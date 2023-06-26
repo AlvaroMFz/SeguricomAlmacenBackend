@@ -3,6 +3,69 @@ const jwt = require('../helpers/jwt');
 var Cliente = require('../models/client');
 const DetalleEstudio = require('../models/DetalleEstudio');
 
+function ObtenerClientes(req, res) {  
+    try {
+        Cliente.find({rol:4})
+          .then(function(clientes) {
+            const clientesJSON = JSON.parse(JSON.stringify(clientes));
+            res.status(200).json({ clientes: clientesJSON });
+          })
+          .catch(function(error) {
+            throw error;
+          });
+      } catch (error) {
+        res.status(500).json({ msg: error.message });
+      }
+   
+}
+
+function ObtenerEspecialista(req, res) {  
+    try {
+        Cliente.find({rol:3})
+          .then(function(clientes) {
+            const clientesJSON = JSON.parse(JSON.stringify(clientes));
+            res.status(200).json({ clientes: clientesJSON });
+          })
+          .catch(function(error) {
+            throw error;
+          });
+      } catch (error) {
+        res.status(500).json({ msg: error.message });
+      }
+   
+}
+function ObtenerGerente(req, res) {  
+    try {
+        Cliente.find({rol:2})
+          .then(function(clientes) {
+            const clientesJSON = JSON.parse(JSON.stringify(clientes));
+            res.status(200).json({ clientes: clientesJSON });
+          })
+          .catch(function(error) {
+            throw error;
+          });
+      } catch (error) {
+        res.status(500).json({ msg: error.message });
+      }
+   
+}
+function ObtenerAdministrador(req, res) {  
+    try {
+        Cliente.find({rol:1})
+          .then(function(clientes) {
+            const clientesJSON = JSON.parse(JSON.stringify(clientes));
+            res.status(200).json({ clientes: clientesJSON });
+          })
+          .catch(function(error) {
+            throw error;
+          });
+      } catch (error) {
+        res.status(500).json({ msg: error.message });
+      }
+   
+}
+
+
 function registrar(req, res) {
     //let data = req.body;
     var cliente = new Cliente(req.body);
@@ -83,5 +146,9 @@ function solicitarCita(req, res) {
 module.exports = {
     registrar,
     autenticar,
+    ObtenerClientes,
+    ObtenerEspecialista,
+    ObtenerGerente,
+    ObtenerAdministrador,
     solicitarCita
 }
