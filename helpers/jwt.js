@@ -2,6 +2,7 @@ var jwt = require('jwt-simple');
 var moment = require('moment');
 var secret= 'alvarofz';
 
+
 exports.createToken = function(user){
     var payload = {
         sub : user.id,
