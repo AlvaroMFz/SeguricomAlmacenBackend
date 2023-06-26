@@ -8,5 +8,6 @@ api.post('/cliente', clienteController.registrar);
 api.put('/cliente/editar/:id', clienteController.editar);
 api.delete('/cliente/eliminar/:id', clienteController.eliminar);
 api.post("/cliente/registrar", clienteController2.registrar);
+api.post("/cliente/autenticar", clienteController2.autenticar);
 
 module.exports = api;
