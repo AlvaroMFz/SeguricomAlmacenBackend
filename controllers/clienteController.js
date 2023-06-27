@@ -129,6 +129,20 @@ function solicitarCita(req, res) {
         res.status(500).json({ msg: error.message })
     }
 }
+function InsertarCita(req,res){
+    const{idCliente,idDetalle} = req.params
+    try{
+        const detallecita = new DetalleCita({
+            idCliente,
+            idDetalle,
+            estado
+        });
+        detallecita.save();
+        res.status(200).json({detallecita:detallecita})
+    }catch (error) {
+        res.status(500).json({msg: error.message})
+    }
+}
 
 function visualizarCitas(req, res) {
     DetalleEstudio.find().populate('cliente').exec((err, clientes_data) => {
