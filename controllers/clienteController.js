@@ -5,7 +5,7 @@ const DetalleEstudio = require('../models/DetalleEstudio');
 
 function ObtenerClientes(req, res) {  
     try {
-        Cliente.find({rol:4})
+        Cliente.find({})
           .then(function(clientes) {
             const clientesJSON = JSON.parse(JSON.stringify(clientes));
             res.status(200).json({ clientes: clientesJSON });
@@ -18,7 +18,24 @@ function ObtenerClientes(req, res) {
       }
    
 }
+function ObtenerUsuario(req,res) {
+   /* const { idCliente } = req.params;
+    try {
+        const cliente = Cliente.findById(idCliente);
+        res.status(200).json(cliente);
+    } catch (error) {
 
+    }*/
+    var id = req.params['id'];
+
+    Cliente.findById(id, (err, user_data)=> {
+        if(user_data){
+            res.status(200).send({user: user_data})
+        }else{
+            res.status(403).send({message: 'No se encontró ningún registro'});
+        }
+    });
+}
 function ObtenerEspecialista(req, res) {  
     try {
         Cliente.find({rol:3})
@@ -132,5 +149,6 @@ module.exports = {
     autenticar,
     ObtenerClientes,
     ObtenerEspecialista,
-    solicitarCita
+    solicitarCita,
+    ObtenerUsuario
 }
