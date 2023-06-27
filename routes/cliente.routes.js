@@ -14,6 +14,10 @@ api.post("/cliente/:idCliente", clienteController2.solicitarCita);
 api.get("/cliente", clienteController2.ObtenerClientes);
 api.get("/cliente/:id", clienteController2.ObtenerUsuario);
 api.get("/cliente/especialistas", clienteController2.ObtenerEspecialista);
+api.get("/gerente/citas", clienteController2.visualizarCitas);
+api.get("/gerente/citasPendiente", clienteController2.visualizarCitasP);
+api.put("/gerente/citasPendiente/estado/:id", clienteController2.update_estadoCita);
+api.get("/gerente/especialistas", clienteController2.visualizarEspecialistas);
 
 
 module.exports = api;

@@ -32,6 +32,10 @@ const DetalleEstudioSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "client",
     },
+    estado: {
+        type: String,
+        default: "Pendiente"
+    }
 });
 
 module.exports = mongoose.model('DetalleEstudio', DetalleEstudioSchema);

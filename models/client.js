@@ -33,6 +33,10 @@ var ClientSchema = Schema({
         required:true,
         default:4
     },
+    estado:{
+        type: String,
+        default: "Disponible"
+    },
     especialista: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "EspecialistaModel",
