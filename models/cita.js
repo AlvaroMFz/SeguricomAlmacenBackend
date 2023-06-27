@@ -1,9 +1,18 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require("mongoose");
 
-var CitaSchema = Schema({
-    idDetalle: {type: Schema.ObjectId, ref: 'DetalleEstudio'},
-    idCliente: {type: Schema.ObjectId, ref: 'client'},
+const DetalleEstudioSchema = mongoose.Schema({
+    idCliente:{
+        type:String
+    },
+    idDetalle:{
+        type:String
+    },
+    Estado:{
+        type:String,
+        default:'Pendiente'
+    }
+    
 });
 
-module.exports = mongoose.model('cita', CitaSchema);
+module.exports = mongoose.model('DetalleEstudio', DetalleEstudioSchema);
+
