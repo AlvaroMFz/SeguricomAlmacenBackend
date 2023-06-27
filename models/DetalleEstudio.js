@@ -23,7 +23,7 @@ const DetalleEstudioSchema = mongoose.Schema({
         type: String,
     },
     respuesta_8: {
-        type: Date,
+        type: String,
     },
     respuesta_9: {
         type: String,
