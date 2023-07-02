@@ -9,6 +9,7 @@ const producto_routes = require('./routes/producto.routes');
 const cliente_routes = require('./routes/cliente.routes');
 const venta_routes = require('./routes/venta.routes');
 const marca_routes = require('./routes/marca.routes');
+const especialista_routes = require('./routes/especialista.routes');
 
 require('./db');
 
@@ -34,5 +35,6 @@ app.use('/api', producto_routes);
 app.use('/api', cliente_routes);
 app.use('/api', venta_routes);
 app.use('/api', marca_routes);
+app.use('/api', especialista_routes);
 
 module.exports = app;
