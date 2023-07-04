@@ -18,6 +18,7 @@ api.get("/gerente/citas", clienteController2.visualizarCitas);
 api.get("/gerente/citasPendiente", clienteController2.visualizarCitasP);
 api.put("/gerente/citasPendiente/estado/:id", clienteController2.update_estadoCita);
 api.get("/gerente/especialistas", clienteController2.visualizarEspecialistas);
+api.get("/especialista/clientes", clienteController2.visualizarClienteAsignado);
 
 
 module.exports = api;

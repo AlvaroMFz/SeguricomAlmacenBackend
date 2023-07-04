@@ -164,6 +164,19 @@ function visualizarCitasP(req, res) {
     }
 }
 
+function visualizarClienteAsignado(req, res) {
+    if ({estado : "Asignado"}) {
+        DetalleEstudio.find({estado : "Asignado"}).populate('cliente').exec((err, clientes_data) => {
+            if (clientes_data) {
+                res.status(200).send({ clientesP: clientes_data });
+            }
+        });
+    }
+    else{
+        res.status(403).send({ message: 'No existe el estado' });
+    }
+}
+
 function update_estadoCita(req, res) {
     let id = req.params['id'];
     let data = req.body;
@@ -199,5 +212,6 @@ module.exports = {
     visualizarCitas,
     visualizarCitasP,
     update_estadoCita,
-    visualizarEspecialistas
+    visualizarEspecialistas,
+    visualizarClienteAsignado
 }
