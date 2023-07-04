@@ -7,5 +7,6 @@ api.post("/especialista/:idCliente",especialistaController.RegistrarDetalleVisit
 api.post("/especialista/cotizacion/:idCliente",especialistaController.RegistrarCotizacion);
 api.get("/especialista/cotizacion/:idCotizacion",especialistaController.ObtenerCotizacionesID);
 api.get("/especialista/cotizacion",especialistaController.ObtenerCotizaciones);
+api.get("/especialista/detalleCliente/:idCliente",especialistaController.ObtenerDetalleCliente);
 
 module.exports = api;

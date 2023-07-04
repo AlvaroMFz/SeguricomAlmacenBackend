@@ -85,9 +85,28 @@ function ObtenerCotizacionesID(req, res){
     });
     }
 
+function ObtenerDetalleCliente(req, res){
+    const { idCliente } = req.params;
+    Cliente.findById(idCliente, (err, cliente_data) => {
+        if (cliente_data.rol == "4") {
+            const clientesJSON = JSON.parse(JSON.stringify(cliente_data));
+                res.status(200).json({ clientes: clientesJSON });
+            // res.status(200).json({
+            //     nombre: cliente_data.nombre,
+            //     apellido: cliente_data.apellido,
+            //     direccion: cliente_data.direccion,
+            // })
+        } else {
+            // res.status(500).json({msg: err.msg})
+            res.status(500).json({msg: "No tiene el rol de cliente"})
+        }
+    })
+}
+
 module.exports = {
 RegistrarDetalleVisita,
 RegistrarCotizacion,
 ObtenerCotizacionesID,
-ObtenerCotizaciones
+ObtenerCotizaciones,
+ObtenerDetalleCliente
 }
